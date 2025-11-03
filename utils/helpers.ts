@@ -22,3 +22,9 @@ export async function addToCartByName(page: Page, name: string) {
   await expect(card).toBeVisible();
   await card.getByRole('button', { name: /Add to cart/i }).click();
 }
+
+export async function cartCount(page: Page) {
+  const badge = page.locator('.shopping_cart_badge');
+  if (await badge.count() === 0) return 0;
+  return parseInt(await badge.innerText(), 10);
+}
